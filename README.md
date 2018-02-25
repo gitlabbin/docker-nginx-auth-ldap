@@ -10,7 +10,7 @@ specificially in [docker-library/docs/nginx](https://github.com/docker-library/d
 # Sample Configuration
 First, you create `nginx.conf.template` as below.
 ```
-$ cat <<EOF > nginx.conf.template
+$ cat <<'EOF' > nginx.conf.template
 user  nginx;
 worker_processes  1;
 
@@ -81,6 +81,6 @@ $ docker run -d -p 127.0.0.1:8080:80 \
     -e NGINX_AUTH_LDAP_BINDDN=<BIND DN (ex. cn=auth,dc=example,dc=com)> \
     -e NGINX_AUTH_LDAP_BINDPW=<password of BIND DN> \
     weseek/nginx-auth-ldap:1.13.9-alpine \
-    sh -c $'envsubst \'$NGINX_AUTH_LDAP_URL$NGINX_AUTH_LDAP_BINDDN$NGINX_AUTH_LDAP_BINDPW\'
+    sh -c $'envsubst \'$NGINX_AUTH_LDAP_URL$NGINX_AUTH_LDAP_BINDDN$NGINX_AUTH_LDAP_BINDPW\' \
     < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g "daemon off;"'
 ```
