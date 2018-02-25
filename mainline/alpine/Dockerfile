@@ -145,10 +145,14 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY ldap.conf.template /etc/nginx/conf.d/ldap.conf.template
 COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
 STOPSIGNAL SIGTERM
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD [ \
+  "sh", "-c", \
+  "envsubst '$$NGINX_AUTH_LDAP_URL$$NGINX_AUTH_LDAP_BINDDN$$NGINX_AUTH_LDAP_BINDPW' < /etc/nginx/conf.d/ldap.conf.template > /etc/nginx/conf.d/000-ldap.conf && exec nginx -g 'daemon off;'" \
+]
