@@ -1,11 +1,6 @@
 # About this Repo
 
-This is the Git repo of the official Docker image for [nginx](https://registry.hub.docker.com/_/nginx/) with [nginx-auth-ldap](https://github.com/kvspb/nginx-auth-ldap).
-See the Hub page for the full readme on how to use the Docker image and for information
-regarding contributing and issues.
-
-The full readme is generated over in [docker-library/docs](https://github.com/docker-library/docs),
-specificially in [docker-library/docs/nginx](https://github.com/docker-library/docs/tree/master/nginx).
+This is the Git repo of the Docker image for [official nginx](https://registry.hub.docker.com/_/nginx/) bundled with [nginx-auth-ldap](https://github.com/kvspb/nginx-auth-ldap).
 
 # Sample Configuration
 First, you create `nginx.conf.template` as below.
@@ -73,7 +68,7 @@ http {
 }
 EOF
 ```
-And, run below command.
+And run the below command.
 ```
 $ docker run -d -p 127.0.0.1:8080:80 \
     -v $(pwd)/nginx.conf.template:/etc/nginx/nginx.conf.template \
@@ -83,4 +78,28 @@ $ docker run -d -p 127.0.0.1:8080:80 \
     weseek/nginx-auth-ldap:1.13.9-alpine \
     sh -c $'envsubst \'$NGINX_AUTH_LDAP_URL$NGINX_AUTH_LDAP_BINDDN$NGINX_AUTH_LDAP_BINDPW\' \
     < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g "daemon off;"'
+```
+If you use docker-compose, you can use the below example.
+```
+version: '2'
+services:
+  nginx:
+    image: weseek/nginx-auth-ldap:1.13.9-alpine
+    command: >
+      /bin/sh -c
+      "envsubst '
+      $$NGINX_AUTH_LDAP_URL
+      $$NGINX_AUTH_LDAP_BINDDN
+      $$NGINX_AUTH_LDAP_BINDPW
+      '< /etc/nginx/nginx.conf.template
+      > /etc/nginx/nginx.conf
+      && nginx -g 'daemon off;'"
+    volumes:
+      - ./nginx.conf.template:/etc/nginx/nginx.conf.template
+    ports:
+      - 127.0.0.1:8080:80
+    environment:
+      NGINX_AUTH_LDAP_URL: <LDAP URL (ex. ldap://example.com/ou=people,dc=example,dc=com)>
+      NGINX_AUTH_LDAP_BINDDN: <BIND DN (ex. cn=auth,dc=example,dc=com)>
+      NGINX_AUTH_LDAP_BINDPW: <password of BIND DN>
 ```
