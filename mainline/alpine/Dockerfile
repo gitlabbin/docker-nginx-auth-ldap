@@ -151,4 +151,7 @@ EXPOSE 80
 
 STOPSIGNAL SIGTERM
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD [ \
+  "sh", "-c", \
+  "envsubst '$$NGINX_AUTH_LDAP_URL$$NGINX_AUTH_LDAP_BINDDN$$NGINX_AUTH_LDAP_BINDPW' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && exec nginx -g 'daemon off;'" \
+]
