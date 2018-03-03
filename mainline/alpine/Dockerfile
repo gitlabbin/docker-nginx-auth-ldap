@@ -138,10 +138,10 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
-COPY ../../nginx-envsubst.sh /usr/bin/nginx-envsubst
+COPY nginx-envsubst.sh /usr/bin/nginx-envsubst
 
 EXPOSE 80
 
 STOPSIGNAL SIGTERM
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["sh", "-c", "nginx-envsubst && exec nginx -g 'daemon off;'"]
