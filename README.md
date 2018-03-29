@@ -13,7 +13,7 @@ $ docker run -d -p 127.0.0.1:8080:80 \
     -e NGINX_AUTH_LDAP_URL=<LDAP URL (ex. ldap://example.com/ou=people,dc=example,dc=com)> \
     -e NGINX_AUTH_LDAP_BINDDN=<BIND DN (ex. cn=auth,dc=example,dc=com)> \
     -e NGINX_AUTH_LDAP_BINDPW=<password of BIND DN> \
-    weseek/nginx-auth-ldap:1.13.9-alpine
+    weseek/nginx-auth-ldap:1.13.9-1-alpine
 ```
 If you want to use docker-compose, you can use the below example.
 ```
@@ -24,7 +24,7 @@ $ vi docker-compose.yml
 version: '2'
 services:
   nginx:
-    image: weseek/nginx-auth-ldap:1.13.9-alpine
+    image: weseek/nginx-auth-ldap:1.13.9-1-alpine
     ports:
       - 127.0.0.1:8080:80
     environment:
