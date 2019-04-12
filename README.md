@@ -5,7 +5,7 @@ This is the Git repo of the Docker image for [official nginx](https://registry.h
 
 # How to run with LDAP authentication example
 Run the below command, and access to http://localhost:8080, you may need credential to open.
-```
+```bash
 $ git clone https://github.com/weseek/nginx-auth-ldap
 $ cd nginx-auth-ldap
 $ docker run -d -p 127.0.0.1:8080:80 \
@@ -16,11 +16,10 @@ $ docker run -d -p 127.0.0.1:8080:80 \
     weseek/nginx-auth-ldap:1.13.9-1-alpine
 ```
 If you want to use docker-compose, you can use the below example.
-```
+```bash
 $ git clone https://github.com/weseek/nginx-auth-ldap
 $ cd nginx-auth-ldap
-$ vi docker-compose.yml
-(add these lines)
+$ cat <<EOF > docker-compose.yml
 version: '2'
 services:
   nginx:
@@ -33,5 +32,14 @@ services:
       NGINX_AUTH_LDAP_BINDPW: <password of BIND DN>
     volumes:
       - ./mainline/alpine/conf.d.example:/etc/nginx/conf.d
+EOF
 $ docker-compose up
+```
+
+# How to catch up with official repository
+
+```bash
+$ git remote add nginx https://github.com/nginxinc/docker-nginx
+$ git fetch nginx master
+$ git merge nginx/master
 ```
