@@ -126,5 +126,5 @@ RUN mkdir /usr/share/nginx/cache && chmod 777 /usr/share/nginx/cache
 
 STOPSIGNAL SIGTERM
 
-#CMD ["sh", "-c", "nginx-envsubst && exec nginx -g 'daemon off;'"]
-CMD ["sh", "-c", "exec nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "nginx-envsubst && exec nginx -g 'daemon off;'"]
+#CMD ["sh", "-c", "exec nginx -g 'daemon off;'"]
