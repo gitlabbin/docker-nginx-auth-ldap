@@ -149,6 +149,7 @@ COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 COPY nginx-envsubst.sh /usr/bin/nginx-envsubst
 RUN touch /etc/nginx/conf.d/000-ladp.conf
 RUN chmod 777 /etc/nginx/conf.d/000-ladp.conf
+RUN mkdir /etc/nginx/cache && chown nginx:nginx /etc/nginx/cache
 
 EXPOSE 80
 
