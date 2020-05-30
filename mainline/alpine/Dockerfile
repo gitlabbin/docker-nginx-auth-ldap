@@ -151,6 +151,7 @@ RUN touch /etc/nginx/conf.d/000-ladp.conf
 RUN chmod 777 /etc/nginx/conf.d/000-ladp.conf
 RUN mkdir /etc/nginx/cache && chown nginx:nginx /etc/nginx/cache
 RUN mkdir /var/cache/nginx/client_temp && chown nginx:nginx /var/cache/nginx/client_temp
+RUN mkdir /var/cache/nginx/proxy_temp && chown nginx:nginx /var/cache/nginx/proxy_temp
 
 EXPOSE 80
 
