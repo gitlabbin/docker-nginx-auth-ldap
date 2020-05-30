@@ -150,6 +150,7 @@ COPY nginx-envsubst.sh /usr/bin/nginx-envsubst
 RUN touch /etc/nginx/conf.d/000-ladp.conf
 RUN chmod 777 /etc/nginx/conf.d/000-ladp.conf
 RUN mkdir /etc/nginx/cache && chown nginx:nginx /etc/nginx/cache
+RUN mkdir /var/cache/nginx/client_temp && chown nginx:nginx /var/cache/nginx/client_temp
 
 EXPOSE 80
 
