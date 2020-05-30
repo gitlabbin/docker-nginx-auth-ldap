@@ -152,8 +152,9 @@ RUN chmod 777 /etc/nginx/conf.d/000-ladp.conf
 RUN mkdir /etc/nginx/cache && chown nginx:nginx /etc/nginx/cache
 RUN mkdir /var/cache/nginx/client_temp && chown nginx:nginx /var/cache/nginx/client_temp
 RUN mkdir /var/cache/nginx/proxy_temp && chmod 777 /var/cache/nginx/proxy_temp
-RUN mkdir /var/cache/nginx/fastcgi_temp && chown 777 /var/cache/nginx/fastcgi_temp
-RUN mkdir /var/cache/nginx/uwsgi_temp && chown 777 /var/cache/nginx/uwsgi_temp
+RUN mkdir /var/cache/nginx/fastcgi_temp && chmod 777 /var/cache/nginx/fastcgi_temp
+RUN mkdir /var/cache/nginx/uwsgi_temp && chmod 777 /var/cache/nginx/uwsgi_temp
+RUN mkdir  /var/cache/nginx/scgi_temp && chmod 777 /var/cache/nginx/scgi_temp
 
 EXPOSE 80
 
