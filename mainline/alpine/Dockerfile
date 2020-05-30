@@ -22,13 +22,7 @@ RUN set -x \
       tar \
       unzip \
       zlib-dev \
-  # Bring in gettext so we can get `envsubst`, then throw
-  # the rest away. To do this, we need to install `gettext`
-  # then move `envsubst` out of the way so `gettext` can
-  # be deleted completely, then move `envsubst` back.
-  && apk add --no-cache --virtual .gettext gettext \
-  && mv /usr/bin/envsubst /tmp/ \
-  && mv /tmp/envsubst /usr/local/bin/ \
+      gettext \
 # Install Nginx from source, see http://nginx.org/en/linux_packages.html#mainline
  && curl -fsSL http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz | tar vxz --strip=1 -C /tmp/src/nginx \
  && curl -fsSL https://github.com/kvspb/nginx-auth-ldap/archive/master.zip -o /tmp/nginx-auth-ldap-master.zip \
