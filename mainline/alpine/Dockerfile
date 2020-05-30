@@ -73,7 +73,7 @@ RUN set -x \
   		--with-compat \
   		--with-file-aio \
   		--with-http_v2_module \
-      #--add-module=/tmp/src/nginx-auth-ldap-master \
+      --add-module=/tmp/src/nginx-auth-ldap-master \
  && make -j$(getconf _NPROCESSORS_ONLN) \
  && make install \
  && mkdir -vp \
