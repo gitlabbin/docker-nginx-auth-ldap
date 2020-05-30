@@ -153,6 +153,7 @@ RUN mkdir /etc/nginx/cache && chown nginx:nginx /etc/nginx/cache
 RUN mkdir /var/cache/nginx/client_temp && chown nginx:nginx /var/cache/nginx/client_temp
 RUN mkdir /var/cache/nginx/proxy_temp && chmod 777 /var/cache/nginx/proxy_temp
 RUN mkdir /var/cache/nginx/fastcgi_temp && chown 777 /var/cache/nginx/fastcgi_temp
+RUN mkdir /var/cache/nginx/uwsgi_temp && chown 777 /var/cache/nginx/uwsgi_temp
 
 EXPOSE 80
 
