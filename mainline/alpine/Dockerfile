@@ -155,6 +155,7 @@ RUN mkdir /var/cache/nginx/proxy_temp && chmod 777 /var/cache/nginx/proxy_temp
 RUN mkdir /var/cache/nginx/fastcgi_temp && chmod 777 /var/cache/nginx/fastcgi_temp
 RUN mkdir /var/cache/nginx/uwsgi_temp && chmod 777 /var/cache/nginx/uwsgi_temp
 RUN mkdir  /var/cache/nginx/scgi_temp && chmod 777 /var/cache/nginx/scgi_temp
+RUN touch /var/run/nginx.pid && chmod 777 /var/run/nginx.pid
 
 EXPOSE 80
 
