@@ -22,6 +22,11 @@ RUN set -x \
       tar \
       unzip \
       zlib-dev \
+  # Install envsubst command for replacing config files in system startup
+    # - it needs libintl package
+    # - only weights 100KB combined with it's libraries
+    && apk add gettext libintl \
+    && mv /usr/bin/envsubst /usr/local/sbin/envsubst \
 # Install Nginx from source, see http://nginx.org/en/linux_packages.html#mainline
  && curl -fsSL http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz | tar vxz --strip=1 -C /tmp/src/nginx \
  && curl -fsSL https://github.com/kvspb/nginx-auth-ldap/archive/master.zip -o /tmp/nginx-auth-ldap-master.zip \
@@ -120,6 +125,7 @@ RUN sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
 
 RUN addgroup nginx root
 #USER nginx
+RUN touch /etc/nginx/conf.d/000-ladp.conf && chmod 777 /etc/nginx/conf.d/000-ladp.conf
 
 STOPSIGNAL SIGTERM
 
