@@ -147,6 +147,8 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 COPY nginx-envsubst.sh /usr/bin/nginx-envsubst
+RUN touch /etc/nginx/conf.d/000-ladp.conf
+RUN chmod 777 /etc/nginx/conf.d/000-ladp.conf
 
 EXPOSE 80
 
