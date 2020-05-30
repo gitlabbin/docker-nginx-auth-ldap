@@ -22,7 +22,6 @@ RUN set -x \
       tar \
       unzip \
       zlib-dev \
-      gettext \
 # Install Nginx from source, see http://nginx.org/en/linux_packages.html#mainline
  && curl -fsSL http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz | tar vxz --strip=1 -C /tmp/src/nginx \
  && curl -fsSL https://github.com/kvspb/nginx-auth-ldap/archive/master.zip -o /tmp/nginx-auth-ldap-master.zip \
@@ -97,6 +96,7 @@ RUN set -x \
 # Clean up build-time packages
  && apk del .build-deps \
  && apk del .gettext \
+ && mv /tmp/envsubst /usr/local/bin/ \
 # Clean up anything else
  && rm -fr \
     /etc/nginx/*.default \
