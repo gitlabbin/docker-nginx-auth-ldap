@@ -163,6 +163,7 @@ RUN addgroup nginx root
 #USER nginx
 RUN touch /etc/nginx/conf.d/000-ladp.conf && chmod 777 /etc/nginx/conf.d/000-ladp.conf
 RUN mkdir /usr/share/nginx/cache && chmod 777 /usr/share/nginx/cache
+RUN mkdir /etc/nginx/cache && chmod 777 /etc/nginx/cache
 
 STOPSIGNAL SIGTERM
 
