@@ -103,8 +103,9 @@ RUN set -x \
     /var/tmp/* \
     /var/cache/apk/*
 
-COPY --from=library/nginx:alpine /etc/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY --from=library/nginx:alpine /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
+COPY nginx-envsubst.sh /usr/bin/nginx-envsubst
 
 # support running as arbitrary user which belogs to the root group
 RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx
@@ -120,6 +121,8 @@ RUN sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
 RUN addgroup nginx root
 USER nginx
 
+EXPOSE 8081
+
 STOPSIGNAL SIGTERM
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["sh", "-c", "nginx-envsubst && exec nginx -g 'daemon off;'"]
