@@ -119,9 +119,7 @@ EXPOSE 8081
 RUN sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
 
 RUN addgroup nginx root
-USER nginx
-
-EXPOSE 8081
+#USER nginx
 
 STOPSIGNAL SIGTERM
 
