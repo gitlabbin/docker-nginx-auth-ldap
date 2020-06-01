@@ -71,7 +71,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
                 openldap-dev \
   && curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \
   && curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz.asc  -o nginx.tar.gz.asc \
-        && curl -fSL https://github.com/kvspb/nginx-auth-ldap/archive/master.zip -o nginx-auth-ldap.zip \
+        && curl -fSL https://github.com/gitlabbin/nginx-auth-ldap/archive/master.zip -o nginx-auth-ldap.zip \
   && export GNUPGHOME="$(mktemp -d)" \
   && found=''; \
   for server in \
