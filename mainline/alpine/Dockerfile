@@ -49,7 +49,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
     --with-compat \
     --with-file-aio \
     --with-http_v2_module \
-                --add-module=/tmp/nginx-auth-ldap-master \
+                --add-module=/tmp/nginx-auth-ldap-fix-escaping \
   " \
   && addgroup -S nginx \
   && adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
@@ -71,7 +71,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
                 openldap-dev \
   && curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \
   && curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz.asc  -o nginx.tar.gz.asc \
-        && curl -fSL https://codeload.github.com/gitlabbin/nginx-auth-ldap/zip/fix-escaping -o nginx-auth-ldap.zip \
+        && curl -fSL https://github.com/gitlabbin/nginx-auth-ldap/archive/fix-escaping.zip -o nginx-auth-ldap.zip \
   && export GNUPGHOME="$(mktemp -d)" \
   && found=''; \
   for server in \
@@ -116,7 +116,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && strip /usr/sbin/nginx* \
   && strip /usr/lib/nginx/modules/*.so \
   && rm -rf /usr/src/nginx-$NGINX_VERSION \
-        && rm -rf /tmp/nginx-auth-ldap-master \
+        && rm -rf /tmp/nginx-auth-ldap-fix-escaping \
   \
   # Bring in gettext so we can get `envsubst`, then throw
   # the rest away. To do this, we need to install `gettext`
